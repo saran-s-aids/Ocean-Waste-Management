@@ -1,0 +1,18 @@
+Marine Plastic Classifier - Evaluation Report
+{
+  "accuracy": 0.48148148148148145,
+  "precision_weighted": 0.6903292181069959,
+  "recall_weighted": 0.48148148148148145,
+  "f1_weighted": 0.4566544566544567
+}
+
+Classification Report (per class)
+              precision    recall  f1-score   support
+
+     plastic       0.56      0.75      0.64        12
+     organic       0.22      0.50      0.31         4
+       other       1.00      0.18      0.31        11
+
+    accuracy                           0.48        27
+   macro avg       0.59      0.48      0.42        27
+weighted avg       0.69      0.48      0.46        27

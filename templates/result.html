@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Result - Marine Plastic Waste Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌊 Marine Plastic Waste Classifier</h1>
+            <p class="subtitle">Classification Result</p>
+        </header>
+
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+        </nav>
+
+        <main>
+            <div class="result-section">
+                <h2>Classification Result</h2>
+
+                <div class="result-container">
+                    <div class="uploaded-image">
+                        <h3>Uploaded Image</h3>
+                        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded image">
+                    </div>
+
+                    <div class="prediction-results">
+                        <div class="main-prediction">
+                            <h3>Predicted Class</h3>
+                            <div class="prediction-class {{ result.class }}">
+                                {% if result.class == 'plastic' %}
+                                    <span class="class-icon">🗑️</span>
+                                {% elif result.class == 'organic' %}
+                                    <span class="class-icon">🍃</span>
+                                {% else %}
+                                    <span class="class-icon">🔧</span>
+                                {% endif %}
+                                <span class="class-name">{{ result.class|title }}</span>
+                            </div>
+                            <div class="confidence">
+                                <p>Confidence: <strong>{{ "%.2f"|format(result.confidence * 100) }}%</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="probability-breakdown">
+                            <h3>Probability Breakdown</h3>
+                            <div class="probabilities">
+                                {% for class_name, probability in result.probabilities.items() %}
+                                    <div class="probability-item">
+                                        <div class="probability-label">
+                                            {% if class_name == 'plastic' %}
+                                                🗑️
+                                            {% elif class_name == 'organic' %}
+                                                🍃
+                                            {% else %}
+                                                🔧
+                                            {% endif %}
+                                            {{ class_name|title }}
+                                        </div>
+                                        <div class="probability-bar-container">
+                                            <div class="probability-bar" style="width: {{ probability * 100 }}%"></div>
+                                        </div>
+                                        <div class="probability-value">{{ "%.2f"|format(probability * 100) }}%</div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="interpretation">
+                            <h3>What does this mean?</h3>
+                            {% if result.class == 'plastic' %}
+                                <p>This image contains <strong>plastic waste</strong>. Plastic pollution is a major threat to marine ecosystems. This waste should be properly recycled or disposed of to prevent ocean contamination.</p>
+                            {% elif result.class == 'organic' %}
+                                <p>This image contains <strong>organic material</strong>. While organic waste is biodegradable, excessive organic pollution can still harm marine environments by depleting oxygen and affecting water quality.</p>
+                            {% else %}
+                                <p>This image contains <strong>other types of waste</strong> such as metal or glass. These materials should also be properly recycled to minimize environmental impact.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="{{ url_for('index') }}" class="btn-primary">🔄 Classify Another Image</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Marine Plastic Waste Classifier | Built with TensorFlow & Flask</p>
+        </footer>
+    </div>
+</body>
+</html>

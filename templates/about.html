@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Marine Plastic Waste Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌊 Marine Plastic Waste Classifier</h1>
+            <p class="subtitle">About This Project</p>
+        </header>
+
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('about') }}" class="active">About</a>
+        </nav>
+
+        <main>
+            <div class="about-section">
+                <h2>About This Project</h2>
+
+                <div class="about-content">
+                    <section>
+                        <h3>🎯 Project Overview</h3>
+                        <p>
+                            This web application uses deep learning to automatically detect and classify marine plastic waste 
+                            in ocean environments. The system can identify three categories of waste: <strong>Plastic</strong>, 
+                            <strong>Organic</strong>, and <strong>Other</strong> materials.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>🤖 Technology Stack</h3>
+                        <ul>
+                            <li><strong>Deep Learning Framework:</strong> TensorFlow/Keras</li>
+                            <li><strong>Model Architecture:</strong> MobileNetV2 (Transfer Learning)</li>
+                            <li><strong>Web Framework:</strong> Flask</li>
+                            <li><strong>Image Processing:</strong> Pillow, NumPy</li>
+                            <li><strong>Backend:</strong> Python</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>🔬 Model Details</h3>
+                        <p>
+                            The classifier uses a Convolutional Neural Network (CNN) based on the MobileNetV2 architecture, 
+                            fine-tuned for marine waste classification. The model was trained with:
+                        </p>
+                        <ul>
+                            <li>Data augmentation for improved generalization</li>
+                            <li>Transfer learning from ImageNet pre-trained weights</li>
+                            <li>Image normalization and preprocessing</li>
+                            <li>224x224 pixel input resolution</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>🌍 Environmental Impact</h3>
+                        <p>
+                            Marine plastic pollution is one of the most pressing environmental challenges of our time. 
+                            An estimated 8 million tons of plastic enter the oceans every year, harming marine life and 
+                            ecosystems. This tool aims to support:
+                        </p>
+                        <ul>
+                            <li>Automated waste monitoring and classification</li>
+                            <li>Research on marine pollution patterns</li>
+                            <li>Environmental cleanup operations</li>
+                            <li>Educational initiatives on ocean conservation</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>📊 Classification Categories</h3>
+                        <div class="class-grid">
+                            <div class="class-card">
+                                <div class="class-icon">🗑️</div>
+                                <h4>Plastic</h4>
+                                <p>Plastic bottles, bags, containers, packaging materials, and other plastic debris</p>
+                            </div>
+                            <div class="class-card">
+                                <div class="class-icon">🍃</div>
+                                <h4>Organic</h4>
+                                <p>Natural materials like seaweed, wood, leaves, and biodegradable organic matter</p>
+                            </div>
+                            <div class="class-card">
+                                <div class="class-icon">🔧</div>
+                                <h4>Other</h4>
+                                <p>Metal, glass, rubber, and other non-plastic, non-organic materials</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3>🚀 Features</h3>
+                        <ul>
+                            <li>Real-time image classification</li>
+                            <li>Confidence scores for predictions</li>
+                            <li>Probability breakdown for all classes</li>
+                            <li>User-friendly web interface</li>
+                            <li>Support for multiple image formats (PNG, JPG, JPEG, GIF)</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>📚 Datasets</h3>
+                        <p>This project can be trained on various marine waste datasets, including:</p>
+                        <ul>
+                            <li><strong>TrashNet:</strong> Classification dataset with various waste categories</li>
+                            <li><strong>TACO:</strong> Trash Annotations in Context for detection and segmentation</li>
+                            <li><strong>MARIDA:</strong> Marine Debris Archive for satellite imagery analysis</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>⚠️ Limitations</h3>
+                        <p>
+                            While this model performs well on the training data, it may have limitations with:
+                        </p>
+                        <ul>
+                            <li>Images taken in different lighting conditions than training data</li>
+                            <li>Unusual angles or perspectives</li>
+                            <li>Multiple types of waste in a single image</li>
+                            <li>Very small or distant objects</li>
+                        </ul>
+                        <p>Always verify critical classifications manually.</p>
+                    </section>
+
+                    <section>
+                        <h3>🔮 Future Enhancements</h3>
+                        <ul>
+                            <li>Support for batch image processing</li>
+                            <li>Object detection to locate waste in images</li>
+                            <li>Integration with drone and underwater camera systems</li>
+                            <li>Real-time video stream analysis</li>
+                            <li>Mobile application development</li>
+                            <li>API endpoints for third-party integration</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>💡 How to Use</h3>
+                        <ol>
+                            <li>Navigate to the Home page</li>
+                            <li>Click "Choose an image file" to select an image from your device</li>
+                            <li>Preview your selected image</li>
+                            <li>Click "Classify Image" to get the prediction</li>
+                            <li>View the results with confidence scores and probability breakdown</li>
+                        </ol>
+                    </section>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="{{ url_for('index') }}" class="btn-primary">🏠 Back to Home</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Marine Plastic Waste Classifier | Built with TensorFlow & Flask</p>
+        </footer>
+    </div>
+</body>
+</html>

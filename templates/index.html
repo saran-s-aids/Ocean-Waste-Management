@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marine Plastic Waste Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌊 Marine Plastic Waste Classifier</h1>
+            <p class="subtitle">Automated Detection and Classification of Marine Plastic Waste</p>
+        </header>
+
+        <nav>
+            <a href="{{ url_for('index') }}" class="active">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <main>
+            <div class="upload-section">
+                <h2>Upload an Image for Classification</h2>
+                <p class="description">
+                    Upload an image of marine waste to classify it into one of three categories: 
+                    <strong>Plastic</strong>, <strong>Organic</strong>, or <strong>Other</strong>.
+                </p>
+
+                <form action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data" class="upload-form">
+                    <div class="file-input-wrapper">
+                        <input type="file" name="file" id="file" accept="image/*" required onchange="previewImage(event)">
+                        <label for="file" class="file-label">
+                            <span class="file-icon">📁</span>
+                            <span class="file-text">Choose an image file</span>
+                        </label>
+                    </div>
+
+                    <div id="preview-container" class="preview-container" style="display: none;">
+                        <img id="preview" src="" alt="Preview">
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        🔍 Classify Image
+                    </button>
+                </form>
+
+                <div class="info-box">
+                    <h3>Supported Formats</h3>
+                    <p>PNG, JPG, JPEG, GIF (Max size: 16MB)</p>
+                </div>
+
+                <div class="classes-info">
+                    <h3>Classification Categories</h3>
+                    <div class="class-grid">
+                        <div class="class-card">
+                            <div class="class-icon">🗑️</div>
+                            <h4>Plastic</h4>
+                            <p>Plastic bottles, bags, containers, and other plastic waste</p>
+                        </div>
+                        <div class="class-card">
+                            <div class="class-icon">🍃</div>
+                            <h4>Organic</h4>
+                            <p>Natural organic materials like seaweed, wood, and biodegradable waste</p>
+                        </div>
+                        <div class="class-card">
+                            <div class="class-icon">🔧</div>
+                            <h4>Other</h4>
+                            <p>Metal, glass, and other non-plastic, non-organic materials</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Marine Plastic Waste Classifier | Built with TensorFlow & Flask</p>
+        </footer>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('preview');
+            const previewContainer = document.getElementById('preview-container');
+            const fileText = document.querySelector('.file-text');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    fileText.textContent = file.name;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
